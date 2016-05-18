@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <global>false</global>
+        <name>sn_k16_im.k16.doughnut_chart</name>
+        <script><![CDATA[angular.module('k16.incident_manager.app').directive('snDoughnutChart', function() {
+
+	"use strict";
+	
+	return {
+		restrict: 'E',
+		template: '<canvas width="400" height="300"/>',
+		replace: true,
+		scope: {total: '=', data: '='},
+		link: function(scope, element) {
+			Chart.defaults.global.legend.position = 'bottom';
+			Chart.defaults.global.legend.labels.boxWidth = 10;
+			var colors = {1:'tomato', 2:'orange', 3:'#ffca1f', 4:'#4bd762', 5:'#278ecf'};
+			var chart = new Chart(element[0], {type: 'doughnut', data: _getChartData()});
+			
+			scope.$watch('total', function(o, n) {
+				chart.config.data = _getChartData();
+				chart.update();
+			});
+			
+			function _getChartData() {
+				var labels = [], data = [], backgroundColor = [], label;
+				for (label in scope.data) {
+					labels.push(label);
+					data.push(scope.data[label].count);
+					if (colors[scope.data[label].value])
+						backgroundColor.push(colors[scope.data[label].value]);
+				}
+				return {labels: labels, datasets: [{data: data, backgroundColor: backgroundColor}]};
+			}
+		}
+	};
+});]]></script>
+        <script_name>k16.doughnut_chart</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-22 21:47:53</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>e2540140530312001c13639c25dc344f</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>sn_k16_im.k16.doughnut_chart</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_script_e2540140530312001c13639c25dc344f</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-04-22 21:47:53</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_view">
+    <sys_ui_view action="INSERT_OR_UPDATE">
+        <group/>
+        <hidden>false</hidden>
+        <name>incident_manager</name>
+        <roles/>
+        <sys_class_name>sys_ui_view</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 23:12:24</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>1f8191a7c3221200a8625ad551d3aef4</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Incident Manager</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_view_1f8191a7c3221200a8625ad551d3aef4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-04-08 23:12:24</sys_updated_on>
+        <title>Incident Manager</title>
+        <user/>
+    </sys_ui_view>
+</record_update>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>The K16 Incident Manager Breadcrumbs UI Macro.&#13;
+&#13;
+Contents:&#13;
+- Provides an indicator of what the Incident List currently contains.  If there is no search =&gt; 'All Incidents'.  If a search currently exists =&gt; 'All Incidents &gt; Incidents with short description that contain foo'.&#13;
+- Selection 'All Incidents' or the '&gt;' removes the current query. &#13;
+- ${SP} Inserts a non breaking space to make the breadcrumbs more readable.&#13;
+</description>
+        <media_type/>
+        <name>breadcrumbs</name>
+        <scoped_name>sn_k16_im_breadcrumbs</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 22:56:02</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>1c4d4d67c3221200a8625ad551d3ae87</sys_id>
+        <sys_mod_count>16</sys_mod_count>
+        <sys_name>breadcrumbs</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_macro_1c4d4d67c3221200a8625ad551d3ae87</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:30:25</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+	
+	<div class="col-md-12">
+		<div class="col-md-8">
+			<h5 class="pull-left">
+				<a ng-click="model.removeSearch()">All Incidents</a>
+				${SP}
+			</h5>
+			<h5 class="pull-left" ng-show="model.searchValue != ''">
+				<a ng-if="model.searchValue != ''" ng-click="model.removeSearch()">&gt;</a>
+				${SP}
+				Incidents with short description that contain {{model.searchValue}}
+			</h5>
+		</div>
+	</div>
+	
+</j:jelly>
+]]></xml>
+    </sys_ui_macro>
+</record_update>

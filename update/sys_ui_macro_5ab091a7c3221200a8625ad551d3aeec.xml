@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>The K16 Incident Manager Dashboard UI Macro&#13;
+&#13;
+Contents:&#13;
+- The header for our dashboard&#13;
+- The dashboard panel, containing the incident counts, ordered by priority.&#13;
+</description>
+        <media_type/>
+        <name>incident_dashboard</name>
+        <scoped_name>sn_k16_im_incident_dashboard</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 23:09:18</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>5ab091a7c3221200a8625ad551d3aeec</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>incident_dashboard</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_macro_5ab091a7c3221200a8625ad551d3aeec</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:45:07</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<div class="panel panel-default">
+		<div class="panel-heading">K16 Incident Manager Dashboard</div>
+		<div class="panel-body">
+			<div class="list-group">
+				<div class="list-group-item">
+					Unassigned Incidents <span class="badge pull-right">{{model.data.total}}</span>
+				</div>
+				<div ng-repeat="(priority, obj) in model.data.dashboard" class="list-group-item">
+					{{priority}} <span class="badge pull-right">{{obj.count}}</span>
+				</div>
+			</div>
+			<div class="list-group">
+				<div class="col-md-12">
+					<sn-doughnut-chart total="model.data.total" data="model.data.dashboard"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</j:jelly>
+]]></xml>
+    </sys_ui_macro>
+</record_update>

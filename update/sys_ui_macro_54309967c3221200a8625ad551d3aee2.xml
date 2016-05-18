@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>The K16 Incident Manager List UI Macro&#13;
+&#13;
+Contents:&#13;
+- A list of unassigned Incidents, containing:&#13;
+    - The Incident Number&#13;
+    - The Incident Short Description&#13;
+    - The 'Assign' button, allowing the user to open the form in a modal and assign the Incident.</description>
+        <media_type/>
+        <name>incident_list</name>
+        <scoped_name>sn_k16_im_incident_list</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 23:06:51</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>54309967c3221200a8625ad551d3aee2</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>incident_list</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_macro_54309967c3221200a8625ad551d3aee2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:42:11</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="record in model.data.records">
+            <div class="row">
+
+                <div class="col-md-10">
+                    <h4 class="list-group-item-heading">{{record.number}}</h4>
+                    <p class="list-group-item-text">{{record.short_description}}</p>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="pull-right" ng-click="openIncident(record.sys_id)">Assign</button>
+                </div>
+
+            </div>
+        </li>
+    </ul>
+
+</j:jelly>
+]]></xml>
+    </sys_ui_macro>
+</record_update>

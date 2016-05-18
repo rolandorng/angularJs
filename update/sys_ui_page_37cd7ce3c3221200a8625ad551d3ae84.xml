@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>The K16 Incident Manager UI Page.&#13;
+&#13;
+Contents:&#13;
+- Set a phase 2 (non-cached) jelly variable to the last date/time value on the UI Scripts table.&#13;
+- Include AngularJS from the UI Scripts table, along side all of the required Angular components, and cache the script with our &#13;
+  aforementioned jelly variable&#13;
+- Initialize the AngularJS application (using the ng-app attribute).&#13;
+- Initialize the AngularJS controller (using the ng-controller attribute).&#13;
+- Include the templates required for the application (using the ng-include attribute).  Each template is a UI Macro.</description>
+        <direct>false</direct>
+        <endpoint>sn_k16_im_incident_manager.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<g2:evaluate var="jvar_stamp">
+		var gr = new GlideRecord('sys_ui_script');
+		gr.orderByDesc('sys_updated_on');
+		gr.query();
+		gr.next();
+		gr.getValue('sys_updated_on');
+	</g2:evaluate>
+
+
+	<g:requires name="sn_k16_im.angularjs-1.4.9.min.jsdbx"/>
+	<g:requires name="sn_k16_im.k16.incident_manager.app.jsdbx" params="cache=$[jvar_stamp]" />
+	<g:requires name="sn_k16_im.k16.incident_manager.model.jsdbx" params="cache=$[jvar_stamp]" />
+	<g:requires name="sn_k16_im.k16.incident_manager.ctlr.jsdbx" params="cache=$[jvar_stamp]" />
+	<g:requires name="sn_k16_im.k16.chart.jsdbx" params="cache=$[jvar_stamp]" />
+	<g:requires name="sn_k16_im.k16.doughnut_chart.jsdbx" params="cache=$[jvar_stamp]" />
+	<g:requires name="sn_k16_im.k16.template_service.jsdbx" params="cache=$[jvar_stamp]" />
+	
+	<div ng-app="k16.incident_manager.app">
+		<div ng-controller="IncidentManagerCtrl">
+			
+			<!-- The container and include for the navigation bar, which contains the header and search input -->
+			<nav ng-include="getTemplate('sn_k16_im_navigation_bar')" class="navbar navbar-default"/>
+
+			<!-- The list breadcrumb, containing text the current search term or 'All Incidents' if no search term exists -->
+			<div ng-include="getTemplate('sn_k16_im_breadcrumbs')" class="row"/>
+
+			<!-- The Incident list, displaying specific Incident information and dashboard, display Incident counts -->
+			<div class="row">
+				<div class="col-md-12">
+					<div ng-include="getTemplate('sn_k16_im_incident_list')" class="col-md-8"/>
+					<div ng-include="getTemplate('sn_k16_im_incident_dashboard')" class="col-md-4"/>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</j:jelly>]]></html>
+        <name>incident_manager</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 21:46:35</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>37cd7ce3c3221200a8625ad551d3ae84</sys_id>
+        <sys_mod_count>22</sys_mod_count>
+        <sys_name>incident_manager</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_page_37cd7ce3c3221200a8625ad551d3ae84</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:44:46</sys_updated_on>
+    </sys_ui_page>
+</record_update>

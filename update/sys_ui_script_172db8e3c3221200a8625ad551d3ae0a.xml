@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>The K16 AngularJS Incident Manager Model&#13;
+&#13;
+Contents:&#13;
+- An initialization method that constructs all of the variables and objects for our controller.  The initialize method returns 'this' to our controller,&#13;
+  allowing the controller to reference all of the variables and methods available in the service.  Since the controller is referencing the service, &#13;
+  any changes made in the service will be reflected in the controller, and subsequently, the view.&#13;
+- A method to remove the current search, and show all Incident records&#13;
+- A method to retrieve the Incident list data, using the scripted web service.  This methods sets the records, dashboard data, and list total &#13;
+  using a promise.&#13;
+</description>
+        <global>false</global>
+        <name>sn_k16_im.k16.incident_manager.model</name>
+        <script><![CDATA[angular.module('k16.incident_manager.app').service('IncidentManagerModel', function($http){
+	
+	"use strict";
+	
+	this.initialize = function() {
+		this.endpoint = '/api/sn_k16_im/incident_manager';
+		this.searchValue = '';
+		this.data = {records: [], dashboard: {}, total: 0};
+		this.getListData();
+		return this;
+	};
+
+	this.removeSearch = function() {
+		this.searchValue = '';
+		this.getListData();
+	};
+	
+	this.getListData = function() {
+		var _this = this;
+		$http.get(_this.endpoint + '?sysparm_search_value=' + _this.searchValue).then(function(response) {
+			if (!response.data.result)
+				return;
+			_this.data.records = response.data.result.records;
+			_this.data.dashboard = response.data.result.dashboard;
+			_this.data.total = response.data.result.total;
+		});
+	};
+});]]></script>
+        <script_name>k16.incident_manager.model</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 21:43:38</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>172db8e3c3221200a8625ad551d3ae0a</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>sn_k16_im.k16.incident_manager.model</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_script_172db8e3c3221200a8625ad551d3ae0a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:32:14</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

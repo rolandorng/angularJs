@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_script">
+    <sys_ui_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description>The K16 AngularJS  Incident Manager Controller&#13;
+&#13;
+Contents:&#13;
+- Initalization of our model, which contains the references to data and methods required for our application.&#13;
+- A $watch to monitor changes in the search value, and update the list results accordingly.&#13;
+- A template method to retrieve the template URLs from the TemplateService.&#13;
+- A method to open Incidents in a form modal.</description>
+        <global>false</global>
+        <name>sn_k16_im.k16.incident_manager.ctlr</name>
+        <script><![CDATA[angular.module('k16.incident_manager.app').controller('IncidentManagerCtrl', ['$scope', 'IncidentManagerModel', 'TemplateService', function($scope, IncidentManagerModel, TemplateService) {
+	
+	"use strict";
+	
+	$scope.model = IncidentManagerModel.initialize();
+
+	$scope.getTemplate = function(name) {
+		return TemplateService.getTemplate(name);
+	};
+
+	$scope.openIncident = function(sysId) {
+		var modal = new GlideModalForm('Incident Manager', 'incident');
+		modal.addParm('sysparm_view', 'Incident Manager');
+		modal.setSysID(sysId);
+		modal.render();
+	};
+
+	$scope.$watch('model.searchValue', function(newValue, oldValue) {
+		if (newValue !== oldValue)
+			$scope.model.getListData();
+	});
+}]);
+]]></script>
+        <script_name>k16.incident_manager.ctlr</script_name>
+        <sys_class_name>sys_ui_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 21:45:48</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>796db8e3c3221200a8625ad551d3aedb</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>sn_k16_im.k16.incident_manager.ctlr</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_script_796db8e3c3221200a8625ad551d3aedb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:41:37</sys_updated_on>
+        <use_scoped_format>false</use_scoped_format>
+    </sys_ui_script>
+</record_update>

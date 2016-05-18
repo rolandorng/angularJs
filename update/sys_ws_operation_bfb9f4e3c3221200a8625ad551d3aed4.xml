@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>get_incidents</name>
+        <operation_script><![CDATA[(function process(request) {
+
+	/**
+	 * Declare the variables for our API.  If the request query parameter
+	 * sysparm_search_value is empty or null, set it to an empty string.
+	 */
+	var searchParameter = request.queryParams.sysparm_search_value || '';
+	var records = [];
+	var dashboard = {};
+
+	/**
+	 * Initialize a new GlideRecord on the Incident table.  Order by priority,
+	 * and ensure that we are retrieving records that does not currently have an
+	 * assignee.  If the search parameter is not empty, add a query to look for
+	 * records that contain the search term in the short_description.
+	 */
+	var gr = new GlideRecord('incident');
+	gr.orderBy('priority');
+	gr.addNullQuery('assigned_to');
+	if (searchParameter != '')
+		gr.addQuery('short_description', 'CONTAINS', searchParameter);
+	gr.query();
+
+	/**
+	 * Push a record object to our array.  If the dashboard object does not have 
+	 * a priority key, add the key, create an object that contains the count and
+	 * value.  If the dashboard object does have a key, increment the count.
+	 */
+	while (gr.next()) {
+		records.push({
+			sys_id: gr.getUniqueValue(), 
+			number: gr.getValue('number'), 
+			short_description: gr.getValue('short_description')
+		});
+
+		if (!dashboard[gr.getDisplayValue('priority')])
+			dashboard[gr.getDisplayValue('priority')] = {count:1, value: gr.getValue('priority')};
+		else
+			dashboard[gr.getDisplayValue('priority')].count += 1;
+	}
+
+	/**
+	 * Return our response.
+	 */
+	return {
+		records: records, 
+		dashboard: dashboard, 
+		total: gr.getRowCount()
+	};
+
+})(request);
+]]></operation_script>
+        <operation_uri>/api/sn_k16_im/incident_manager</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 21:29:00</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>bfb9f4e3c3221200a8625ad551d3aed4</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>get_incidents</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ws_operation_bfb9f4e3c3221200a8625ad551d3aed4</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:10:43</sys_updated_on>
+        <web_service_definition display_value="Incident Manager">7cb9f4e3c3221200a8625ad551d3ae12</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

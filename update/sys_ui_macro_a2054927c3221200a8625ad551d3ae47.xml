@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ui_macro">
+    <sys_ui_macro action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <category>general</category>
+        <description>The K16 Incident Manager Navigation Bar UI Macro&#13;
+&#13;
+Contents:&#13;
+- The Navigation Bar header.&#13;
+- The Incident Manager search, which searches a value contained in the Short Description of the record.</description>
+        <media_type/>
+        <name>navigation_bar</name>
+        <scoped_name>sn_k16_im_navigation_bar</scoped_name>
+        <sys_class_name>sys_ui_macro</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2016-04-08 22:18:17</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_id>a2054927c3221200a8625ad551d3ae47</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>navigation_bar</sys_name>
+        <sys_package display_value="K16 Incident Manager" source="sn_k16_im">ce99b4e3c3221200a8625ad551d3ae65</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="K16 Incident Manager">ce99b4e3c3221200a8625ad551d3ae65</sys_scope>
+        <sys_update_name>sys_ui_macro_a2054927c3221200a8625ad551d3ae47</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2016-05-18 23:29:21</sys_updated_on>
+        <xml><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+
+	<div class="col-md-8">
+		<h4>K16 Incident Manager</h4>
+    </div>
+                
+	<div class="col-md-4">
+		<input ng-model="model.searchValue" 
+			   ng-model-options="{debounce: { 'default': 500, 'blur': 0 }}" 
+			   placeholder="Search ..." 
+			   class="form-control col-md-8" />
+    </div>
+            
+</j:jelly>
+]]></xml>
+    </sys_ui_macro>
+</record_update>
